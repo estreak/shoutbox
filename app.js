@@ -53,7 +53,7 @@ app.post('/post',
 
 // R.E.S.T
 app.get('/api/user/:id', api.user);
-//app.get('/api/entries/:page?', api.entries);
+app.get('/api/entries/:page?', page(Entry.count), api.entries);
 app.post('/api/entry', entries.submit);
 
 // development only

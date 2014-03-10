@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require('../lib/user');
+var Entry = require('../lib/entry');
 
 exports.auth = express.basicAuth(User.authenticate);
 
@@ -10,3 +11,13 @@ exports.user = function(req, res, next){
     res.json(user);
   });
 };
+
+// this rendors JSON instead of a template like in entries.js
+exports.entries = function(req, res, next){
+  var page = req.page;
+  Entry.getRange(page.from, page.to, function(err, entries){
+    if (err) return next(err);
+    res.json(entries);
+  });
+};
+
