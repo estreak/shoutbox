@@ -24,9 +24,9 @@ exports.submit = function(req, res, next){
   entry = new Entry({
     title: data.title,
     body: data.body,
-    username: req.user, // works from REST or sessions,
-                        // interestingly, res.locals.user was invalid
-                        // here after setting it in middleware user.js
+    username: req.user.name, // works from REST or sessions,
+                             // interestingly, res.locals.user was invalid
+                             // here after setting it in middleware user.js
   });
 
   // save the entry in redis 

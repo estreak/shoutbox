@@ -37,6 +37,8 @@ app.use('/api', api.auth);
 app.use(user);
 app.use(messages);
 app.use(app.router);
+app.use(routes.notfound);
+app.use(routes.error);
 
 app.get('/register', register.form);
 app.post('/register', register.submit);
@@ -55,6 +57,15 @@ app.post('/post',
 app.get('/api/user/:id', api.user);
 app.get('/api/entries/:page?', page(Entry.count), api.entries);
 app.post('/api/entry', entries.submit);
+
+// error injection (use as $ ERROR_ROUTE=1 node app.js)
+if (process.env.ERROR_ROUTE) {
+  app.get('/dev/error', function(req, res, next){
+    var err = new Error('database done got hosed');
+    err.type = 'database';
+    next(err);
+  });
+}
 
 // development only
 if ('development' == app.get('env')) {

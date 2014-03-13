@@ -4,3 +4,4 @@ curl http://127.0.0.1:3000/api/user/13 -v
 curl -F entry[title]='rest rocks' -F entry[body]='yup yup' http://test1:pass1@127.0.0.1:3000/api/entry
 curl -F entry[title]='rest rocks' -F entry[body]='yup yup' http://test1:pass2@127.0.0.1:3000/api/entry
 curl http://test1:pass1@127.0.0.1:3000/api/entriess
+curl  -i   -H 'Accept: application/xml' http://test1:pass1@127.0.0.1:3000/api/entries
